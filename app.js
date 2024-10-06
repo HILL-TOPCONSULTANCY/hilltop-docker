@@ -13,8 +13,8 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
-// Set up the server
+// Set up the server with the environment port variable
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    console.log(`Application is running and accessible on port ${PORT}`);
 });

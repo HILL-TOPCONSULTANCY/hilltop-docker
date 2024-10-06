@@ -196,3 +196,50 @@ If you encounter any issues during the process, make sure:
 - The necessary dependencies are installed.
 - The ports are correctly mapped and accessible.
 
+## Docker Commands
+
+### Frequently Used Docker Commands and Explanations
+
+1. **`docker --version`**
+   - **Explanation**: Displays the installed version of Docker on the system.
+
+2. **`docker pull <image>`**
+   - **Explanation**: Downloads a Docker image from Docker Hub or another registry to your local machine.
+
+3. **`docker build -t <image_name> .`**
+   - **Explanation**: Builds a Docker image from a `Dockerfile` in the current directory and tags it with a name.
+
+4. **`docker run -d -p <host_port>:<container_port> <image_name>`**
+   - **Explanation**: Runs a Docker container in detached mode, mapping the container’s port to the host machine’s port.
+
+5. **`docker ps`**
+   - **Explanation**: Lists running containers.
+
+6. **`docker ps -a`**
+   - **Explanation**: Lists all containers, including stopped ones.
+
+7. **`docker stop <container_id>`**
+   - **Explanation**: Stops a running container using its container ID.
+
+8. **`docker start <container_id>`**
+   - **Explanation**: Starts a stopped container using its container ID.
+
+9. **`docker rm <container_id>`**
+   - **Explanation**: Removes a stopped container.
+
+10. **`docker rmi <image_id>`**
+    - **Explanation**: Deletes a Docker image from the local machine.
+
+11. **`docker exec -it <container_id> /bin/bash`**
+    - **Explanation**: Starts an interactive terminal inside a running container.
+
+12. **`docker logs <container_id>`**
+    - **Explanation**: Shows the logs of a running or stopped container.
+
+13. **`docker-compose up`**
+    - **Explanation**: Starts all services defined in a `docker-compose.yml` file.
+
+14. **`docker-compose down`**
+    - **Explanation**: Stops and removes all containers, networks, and volumes created by `docker-compose up`.
+
+---

@@ -1,0 +1,64 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    align-items: center;
+}
+
+.logo img {
+    width: 120px;
+}
+
+.menu-bar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu-bar ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+.menu-bar ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.menu-bar ul li a:hover {
+    color: #f39c12;
+}
+
+main {
+    padding: 40px;
+    text-align: center;
+}
+
+main h1 {
+    font-size: 2.5em;
+    color: #333;
+}
+
+.services, .contact {
+    margin-top: 40px;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}

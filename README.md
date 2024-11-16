@@ -1,4 +1,3 @@
-Here's a `README.md` file that includes the step-by-step instructions, from Docker installation to accessing the Node.js application on your EC2 instance:
 
 ---
 
@@ -188,13 +187,6 @@ To remove the image:
 ```bash
 docker rmi hilltop-consultancy-app
 ```
-
-## Troubleshooting
-
-If you encounter any issues during the process, make sure:
-- Docker is running properly.
-- The necessary dependencies are installed.
-- The ports are correctly mapped and accessible.
 
 ## Docker Commands
 

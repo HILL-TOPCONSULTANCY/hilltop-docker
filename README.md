@@ -1,11 +1,166 @@
+# **1. Introduction**
+---
+
+## **2. Understanding the Basics**
+### **What is Virtualization?**
+- **Definition**: Virtualization involves running multiple virtual machines (VMs) on a single physical machine. Each VM contains its own operating system, libraries, and applications.
+- **Benefits**: Resource sharing, isolation, and flexibility.
+- **Drawbacks**:
+  - Heavyweight: Each VM includes a full OS, consuming more resources.
+  - Slower startup: Booting a VM can take several minutes.
+
+#### **What is Containerization?**
+- **Definition**: Containerization is a lightweight alternative to virtualization. It allows you to run multiple applications isolated from one another while sharing the host system’s kernel.
+- **How it Works**:
+  - Containers package an application and its dependencies into a single unit.
+  - They rely on the host OS, making them lightweight and fast.
+- **Benefits**:
+  - Efficient use of resources.
+  - Faster startup times (seconds).
+  - Portability: "Write once, run anywhere."
+
+#### **Why Use Containers?**
+- Solve the "It works on my machine" problem by ensuring consistency across development, testing, and production environments.
+- Enable microservices architecture, where each service runs in its own container.
+
+#### **What is Docker?**
+- **Definition**: Docker is a platform that simplifies containerization. It helps developers package applications into standardized units (containers).
+- **Key Components**:
+  - **Docker Images**: Blueprints for containers.
+  - **Docker Containers**: Running instances of images.
+  - **Docker Hub**: A repository to share Docker images.
 
 ---
 
-# Hilltop Consultancy Web Application
+### **3. Getting Started with Docker**
+#### **Installing Docker**
+Follow installation steps for your operating system from the [Docker Docs](https://docs.docker.com/get-docker/).
 
-This is a simple Node.js application for an IT consultancy firm, **Hilltop Consultancy**, which offers services such as web development, IT consultancy, DevOps solutions, and cloud training. The application is Dockerized for easy deployment.
+#### **Verify Installation**
+Run:
+```bash
+docker --version
+```
+---
 
-## Prerequisites
+### **4. Docker Basics**
+#### **Running Your First Container**
+Start with a test container:
+```bash
+docker run hello-world
+```
+- This downloads the `hello-world` image, creates a container, and runs it.
+
+---
+
+### **5. Working with the Hilltop Consultancy App**
+We’ll use the Hilltop Consultancy App to dive deeper into Docker.
+
+#### **Step 1: Running the Existing Image**
+Run the prebuilt image:
+```bash
+docker run -d -p 8080:8080 hilltop-consultancy-app
+```
+- **Flags**:
+  - `-d`: Run in detached mode.
+  - `-p 8080:8080`: Map the container’s port 8080 to the host’s port 8080.
+- Access the app at `http://localhost:8080`.
+
+#### **Step 2: Understanding the Docker Commands**
+- **List running containers**:
+  ```bash
+  docker ps
+  ```
+- **Stop a container**:
+  ```bash
+  docker stop <container_id>
+  ```
+- **Remove a container**:
+  ```bash
+  docker rm <container_id>
+  ```
+- **List available images**:
+  ```bash
+  docker images
+  ```
+- **Remove an image**:
+  ```bash
+  docker rmi hilltop-consultancy-app
+  ```
+
+---
+
+### **6. Writing a Dockerfile**
+We’ll rebuild the Hilltop Consultancy App image using a `Dockerfile`.
+
+#### **Step 1: Create a Dockerfile**
+1. Navigate to the app directory.
+2. Create a file named `Dockerfile` with the following content:
+   ```dockerfile
+   # Use the official Node.js image as the base
+   FROM node:18-alpine
+
+   # Set the working directory in the container
+   WORKDIR /app
+
+   # Copy package.json and install dependencies
+   COPY package*.json ./
+   RUN npm install
+
+   # Copy the rest of the application code
+   COPY . .
+
+   # Expose the app's port
+   EXPOSE 8080
+
+   # Command to run the app
+   CMD ["npm", "start"]
+   ```
+
+#### **Step 2: Build the Image**
+Run:
+```bash
+docker build -t hilltop-consultancy-app .
+```
+- **`-t`**: Tag the image with a name.
+
+#### **Step 3: Run the New Image**
+Run:
+```bash
+docker run -d -p 8080:8080 hilltop-consultancy-app
+```
+
+---
+
+### **7. Docker Compose for Multi-Container Apps**
+Docker Compose helps manage multi-container setups. Let’s add a MongoDB service to the app.
+
+#### **Create a `docker-compose.yml` File**
+```yaml
+version: '3.8'
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+  db:
+    image: mongo
+    ports:
+      - "27017:27017"
+```
+
+#### **Run the Setup**
+Run:
+```bash
+docker-compose up
+```
+- This starts both the app and a MongoDB instance.
+
+---
+
+## DOCKER INSTALLATION
 
 Make sure the following are installed on your EC2 instance or local machine:
 

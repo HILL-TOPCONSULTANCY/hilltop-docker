@@ -32,7 +32,6 @@
 
 ---
 ## INTRODUCTION TO DOCKER:
-  ==========================
 Docker solves several problems related to software development, deployment, and scalability by providing a lightweight, 
 consistent, and portable containerization platform. Below is a detailed explanation of the problems Docker addresses, 
 supported by real-world scenarios

@@ -244,42 +244,6 @@ docker run hello-world
 
 ---
 
-### **5. Working with the Hilltop Consultancy App**
-We’ll use the Hilltop Consultancy App to dive deeper into Docker.
-
-#### **Step 1: Running the Existing Image**
-Run the prebuilt image:
-```bash
-docker run -d -p 8080:8080 hilltop-consultancy-app
-```
-- **Flags**:
-  - `-d`: Run in detached mode.
-  - `-p 8080:8080`: Map the container’s port 8080 to the host’s port 8080.
-- Access the app at `http://localhost:8080`.
-
-#### **Step 2: Understanding the Docker Commands**
-- **List running containers**:
-  ```bash
-  docker ps
-  ```
-- **Stop a container**:
-  ```bash
-  docker stop <container_id>
-  ```
-- **Remove a container**:
-  ```bash
-  docker rm <container_id>
-  ```
-- **List available images**:
-  ```bash
-  docker images
-  ```
-- **Remove an image**:
-  ```bash
-  docker rmi hilltop-consultancy-app
-  ```
----
-
 ### **6. Writing a Dockerfile**
 We’ll rebuild the Hilltop Consultancy App image using a `Dockerfile`.
 
@@ -319,6 +283,42 @@ Run:
 ```bash
 docker run -d -p 8080:8080 hilltop-consultancy-app
 ```
+---
+
+### **5. Working with the Hilltop Consultancy App**
+We’ll use the Hilltop Consultancy App to dive deeper into Docker.
+
+#### **Step 8: Running the Existing Image**
+Run the prebuilt image:
+```bash
+docker run -d -p 8080:8080 hilltop-consultancy-app
+```
+- **Flags**:
+  - `-d`: Run in detached mode.
+  - `-p 8080:8080`: Map the container’s port 8080 to the host’s port 8080.
+- Access the app at `http://localhost:8080`.
+
+#### **Step 2: Understanding the Docker Commands**
+- **List running containers**:
+  ```bash
+  docker ps
+  ```
+- **Stop a container**:
+  ```bash
+  docker stop <container_id>
+  ```
+- **Remove a container**:
+  ```bash
+  docker rm <container_id>
+  ```
+- **List available images**:
+  ```bash
+  docker images
+  ```
+- **Remove an image**:
+  ```bash
+  docker rmi hilltop-consultancy-app
+  ```
 ---
 
 ### **7. Docker Compose for Multi-Container Apps**

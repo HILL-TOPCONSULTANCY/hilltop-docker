@@ -248,6 +248,71 @@ docker run hello-world
 We’ll rebuild the Hilltop Consultancy App image using a `Dockerfile`.
 
 #### **Step 1: Create a Dockerfile**
+A **Dockerfile** is a text file containing a series of instructions used to define and build a Docker image. It acts as a blueprint for creating containers, specifying what is included in the image, 
+such as the base image, application code, libraries, environment variables, and commands to run when the container starts.
+
+---
+
+### **Key Features of a Dockerfile**
+- **Declarative Format**: Instructions in a Dockerfile specify "what to do," and Docker executes them to create an image.
+- **Layered Build Process**: Each instruction creates a new layer in the image, making builds efficient as unchanged layers are cached.
+
+---
+
+### **Components of a Dockerfile**
+Here’s a breakdown of common instructions in a Dockerfile:
+
+1. **`FROM`**:
+   - Specifies the base image to use (e.g., an operating system or runtime environment).
+     ```dockerfile
+     FROM node:18-alpine
+     ```
+   - Here, `node:18-alpine` is a lightweight Node.js runtime image.
+
+2. **`WORKDIR`**:
+   - Sets the working directory inside the container.
+     ```dockerfile
+     WORKDIR /app
+     ```
+
+3. **`COPY`**:
+   - Copies files from the host machine to the image.
+     ```dockerfile
+     COPY . .
+     ```
+
+4. **`RUN`**:
+   - Executes commands during the build process (e.g., installing dependencies).
+   - Example:
+     ```dockerfile
+     RUN npm install
+     ```
+
+5. **`EXPOSE`**:
+   - Declares the port the container listens on at runtime (for documentation purposes).
+     ```dockerfile
+     EXPOSE 8080
+     ```
+
+6. **`CMD`**:
+   - Specifies the command to run when the container starts.
+     ```dockerfile
+     CMD ["npm", "start"]
+     ```
+
+7. **`ENV`**:
+   - Sets environment variables in the container.
+     ```dockerfile
+     ENV NODE_ENV=production
+     ```
+
+8. **`LABEL`**:
+   - Adds metadata to the image.
+     ```dockerfile
+     LABEL maintainer="htconsult.dk"
+     ```
+---
+## EXAMPLE OF DOCKERFILE
 1. Navigate to the app directory.
 2. Create a file named `Dockerfile` with the following content:
    ```dockerfile

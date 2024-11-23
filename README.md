@@ -1,7 +1,4 @@
-# **1. Introduction**
----
-
-## **2. Understanding the Basics**
+# **1. Understanding the Basics**
 ### **What is Virtualization?**
 - **Definition**: Virtualization involves running multiple virtual machines (VMs) on a single physical machine. Each VM contains its own operating system, libraries, and applications.
 - **Benefits**: Resource sharing, isolation, and flexibility.
@@ -478,29 +475,6 @@ EXPOSE 8070
 CMD ["npm", "start"]
 ```
 
-### 8. Update the `package.json`
-
-Make sure your `package.json` includes a `"start"` script:
-
-```json
-{
-  "name": "hilltop-docker",
-  "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
-  "scripts": {
-    "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "ejs": "^3.1.10",
-    "express": "^4.21.0"
-  }
-} -->
-```
 
 ### 9. Build the Docker Image
 
@@ -565,6 +539,92 @@ To remove the image:
 ```bash
 docker rmi hilltop-consultancy-app
 ```
+---
+Here’s an explanation of each term with its meaning and role in Docker:
+
+---
+
+### **Dockerfile**  
+A **Dockerfile** is a text file containing instructions to build a Docker image. It specifies all the steps, such as selecting a base image, installing dependencies, copying files, and defining how the application runs. 
+
+**Example**:
+```dockerfile
+# Start with a Node.js base image
+FROM node:18-alpine
+
+# Set the working directory
+WORKDIR /app
+
+# Copy package.json and install dependencies
+COPY package*.json ./
+RUN npm install
+
+# Copy the application code
+COPY . .
+
+# Expose the application's port
+EXPOSE 8080
+
+# Run the application
+CMD ["node", "app.js"]
+```
+
+---
+
+### **Docker Image**  
+A **Docker image** is a lightweight, standalone, and executable software package that contains everything needed to run an application,
+including the code, runtime, libraries, and dependencies. Think of it as a snapshot of your application at a specific point in time.
+
+**Key Points**:
+- Built from a Dockerfile.
+- Immutable (cannot be changed once created).
+- Used to create Docker containers.
+
+---
+
+### **Docker Container**  
+A **Docker container** is a running instance of a Docker image. It is an isolated environment where your application runs, behaving like a lightweight virtual machine but sharing the host system's kernel.
+
+**Key Points**:
+- Containers are ephemeral (short-lived), but their state can be preserved using volumes or by committing changes to a new image.
+- Multiple containers can run from the same image.
+
+**Example**:
+```bash
+docker run -p 8080:8080 my-app
+```
+This command runs a container from the `my-app` image and maps port `8080` of the container to port `8080` on the host.
+
+---
+
+### **Docker Hub**  
+**Docker Hub** is a public registry for Docker images. It allows users to share, store, and distribute Docker images. 
+You can pull official or community-contributed images or push your own images to Docker Hub for reuse or distribution.
+
+**Key Points**:
+- Free and paid tiers are available.
+- Common images: `node`, `nginx`, `ubuntu`, etc.
+
+**Example**:
+```bash
+# Pull an official Node.js image from Docker Hub
+docker pull node:18-alpine
+```
+
+---
+
+### **Docker Repository**  
+A **Docker repository** is a collection of related Docker images, often different versions of the same application or software.
+For example, a `node` repository may contain images for different versions of Node.js (e.g., `18-alpine`, `16-buster`).
+
+**Key Points**:
+- A repository can be public or private.
+- Exists on platforms like Docker Hub, AWS ECR, GitHub Container Registry, etc.
+
+**Example**:
+- **Public Repo**: `docker.io/library/node` (default location for Docker Hub images).
+- **Private Repo**: `my-org/my-private-image`.
+---
 
 ## Docker Commands
 

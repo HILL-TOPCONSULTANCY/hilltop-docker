@@ -262,20 +262,24 @@ Here’s a breakdown of common instructions in a Dockerfile:
 1. **`FROM`**:
    - Specifies the base image to use (e.g., an operating system or runtime environment).
      ```dockerfile
-     FROM node:18-alpine
+     FROM node:10-alpine
      ```
    - Here, `node:18-alpine` is a lightweight Node.js runtime image.
+  
+     
+RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
+
 
 2. **`WORKDIR`**:
    - Sets the working directory inside the container.
      ```dockerfile
-     WORKDIR /app
+     WORKDIR /home/node/app
      ```
 
 3. **`COPY`**:
    - Copies files from the host machine to the image.
      ```dockerfile
-     COPY . .
+     package*.json ./
      ```
 
 4. **`RUN`**:
@@ -333,215 +337,72 @@ Here’s a breakdown of common instructions in a Dockerfile:
    CMD ["npm", "start"]
    ```
 
-#### **Step 2: Build the Image**
-Run:
-```bash
-docker build -t hilltop-consultancy-app .
-```
-- **`-t`**: Tag the image with a name.
+### Steps:
 
-#### **Step 3: Run the New Image**
-Run:
-```bash
-docker run -d -p 8080:8080 hilltop-consultancy-app
-```
----
-
-### **5. Working with the Hilltop Consultancy App**
-We’ll use the Hilltop Consultancy App to dive deeper into Docker.
-
-#### **Step 8: Running the Existing Image**
-Run the prebuilt image:
-```bash
-docker run -d -p 8080:8080 hilltop-consultancy-app
-```
-- **Flags**:
-  - `-d`: Run in detached mode.
-  - `-p 8080:8080`: Map the container’s port 8080 to the host’s port 8080.
-- Access the app at `http://localhost:8080`.
-
-#### **Step 2: Understanding the Docker Commands**
-- **List running containers**:
-  ```bash
-  docker ps
-  ```
-- **Stop a container**:
-  ```bash
-  docker stop <container_id>
-  ```
-- **Remove a container**:
-  ```bash
-  docker rm <container_id>
-  ```
-- **List available images**:
-  ```bash
-  docker images
-  ```
-- **Remove an image**:
-  ```bash
-  docker rmi hilltop-consultancy-app
-  ```
----
-
-### **7. Docker Compose for Multi-Container Apps**
-Docker Compose helps manage multi-container setups. Let’s add a MongoDB service to the app.
-
-#### **Create a `docker-compose.yml` File**
-```yaml
-version: '3.8'
-services:
-  app:
-    build: .
-    ports:
-      - "8080:8080"
-    depends_on:
-      - db
-  db:
-    image: mongo
-    ports:
-      - "27017:27017"
-```
-
-#### **Run the Setup**
-Run:
-```bash
-docker-compose up
-```
-- This starts both the app and a MongoDB instance.
+1. **Build the Docker Image**  
+   In the root of your project directory (where the `Dockerfile` is located), run:
+   ```bash
+   docker build -t hilltopconsultancy/my-app:1.0 .
+   ```
+   This command:
+   - Names your image `hilltopconsultancy/my-app`.
+   - Tags it with version `1.0`.
 
 ---
 
-### 2. Install Node.js (for Local Development)
+2. **Test the Docker Image (Optional)**  
+   Run the image locally to ensure it works:
+   ```bash
+   docker run -p 8080:8080 hilltopconsultancy/my-app:1.0
+   ```
+   Visit `http://localhost:8080` in your browser to confirm it's functioning.
 
-If you're running this project locally (not necessary inside Docker):
-
-```bash
-sudo yum install -y nodejs
-node -v
-npm -v
-```
-
-### 3. Clone the Repository or Create the Project Directory
-
-```bash
-git clone https://github.com/HILL-TOPCONSULTANCY/hilltop-docker.git
-cd hilltop-docker
-```
-
-### 4. Set Up Node.js Project
-
-Initialize the Node.js project:
-
-```bash
-npm init -y
-```
-
-### 5. Install Dependencies
-
-Install the required dependencies, such as `express` and `ejs`:
-
-```bash
-npm install express ejs
-```
-
-<!-- ### 6. Create the Application Files
-
-- Create an `app.js` file to handle the Node.js logic.
-- Create a `views/` folder with an `index.ejs` file for the frontend.
-- Create a `public/` folder for static assets like CSS and images.
-  
-### 7. Create the `Dockerfile`
-
-Create a `Dockerfile` in your project directory for building the Docker image:
-
-```Dockerfile
-# Step 1: Use a lightweight Node.js image
-FROM node:18-alpine
-
-# Step 2: Set the working directory
-WORKDIR /usr/src/app
-
-# Step 3: Copy package.json and install dependencies
-COPY package*.json ./
-RUN npm install
-
-# Step 4: Copy the rest of the application code
-COPY . .
-
-# Step 5: Expose port 8070
-EXPOSE 8070
-
-# Step 6: Set the default command to run the application
-CMD ["npm", "start"]
-```
-
-
-### 9. Build the Docker Image
-
-After setting up the Dockerfile, build the Docker image:
-
-```bash
-docker build -t hilltop-consultancy-app .
-```
-
-### 10. Run the Docker Container
-
-Once the image is built, run the container and expose it on port `8070`:
-
-```bash
-docker run -d -p 8070:8070 --name hilltop hilltop-consultancy-app
-```
-# Ensure port 8070 rule is open on the security Group
-### 11. Check the Logs
-
-Verify that the container is running successfully by checking the Docker logs:
-
-```bash
-docker logs hilltop
-```
-
-You should see a message like:
-
-```
-Application is running and accessible on port 8070
-```
-
-### 12. Access the Application
-
-Finally, access the application in your browser by navigating to:
-
-```
-http://<your-ec2-public-ip>:8070
-```
-
-To find the public IP of your EC2 instance, you can run:
-
-```bash
-curl http://169.254.169.254/latest/meta-data/public-ipv4
-```
-
-### 13. Stop and Remove the Docker Container
-
-To stop the container:
-
-```bash
-docker stop hilltop
-```
-
-To remove the container:
-
-```bash
-docker rm hilltop
-```
-
-To remove the image:
-
-```bash
-docker rmi hilltop-consultancy-app
-```
 ---
-Here’s an explanation of each term with its meaning and role in Docker:
 
+3. **Log In to Docker Hub**  
+   Log in to your Docker Hub account:
+   ```bash
+   docker login
+   ```
+   Provide your username (`hilltopconsultancy`) and password when prompted.
+
+---
+
+4. **Push the Image to Docker Hub**  
+   Push the built image to your Docker Hub repository:
+   ```bash
+   docker push hilltopconsultancy/my-app:1.0
+   ```
+
+---
+
+5. **Verify on Docker Hub**  
+   Go to [Docker Hub](https://hub.docker.com) and log in. Navigate to your `hilltopconsultancy` account to confirm the `my-app` repository contains the pushed image.
+
+---
+
+6. **Pull the Image (Optional)**  
+   On another system or after removing the local image, pull the image to confirm it works:
+   ```bash
+   docker pull hilltopconsultancy/my-app:1.0
+   ```
+
+---
+
+### Complete Command List:
+```bash
+# Build the Docker image
+docker build -t hilltopconsultancy/my-app:1.0 .
+
+# Log in to Docker Hub
+docker login
+
+# Push the Docker image to Docker Hub
+docker push hilltopconsultancy/my-app:1.0
+
+# Pull the Docker image (optional)
+docker pull hilltopconsultancy/my-app:1.0
+```
 ---
 
 ### **Dockerfile**  

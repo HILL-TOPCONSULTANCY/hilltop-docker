@@ -295,19 +295,16 @@ Verify Docker is installed by running:
 ```bash
 docker --version
 ```
-
 ---
 
 ### **4. Docker Basics**
-#### **Running Your First Container**
+#### ** Example, Running Your First Container**
 Start with a test container:
 ```bash
 docker run hello-world
 ```
 - This downloads the `hello-world` image, creates a container, and runs it.
-
 ---
-
 ### **6. Writing a Dockerfile**
 We’ll rebuild the Hilltop Consultancy App image using a `Dockerfile`.
 
@@ -332,48 +329,40 @@ Here’s a breakdown of common instructions in a Dockerfile:
      FROM node:10-alpine
      ```
    - Here, `node:18-alpine` is a lightweight Node.js runtime image.
-  
      
 RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
-
 
 2. **`WORKDIR`**:
    - Sets the working directory inside the container.
      ```dockerfile
      WORKDIR /home/node/app
      ```
-
 3. **`COPY`**:
    - Copies files from the host machine to the image.
      ```dockerfile
      package*.json ./
      ```
-
 4. **`RUN`**:
    - Executes commands during the build process (e.g., installing dependencies).
    - Example:
      ```dockerfile
      RUN npm install
      ```
-
 5. **`EXPOSE`**:
    - Declares the port the container listens on at runtime (for documentation purposes).
      ```dockerfile
      EXPOSE 8080
      ```
-
 6. **`CMD`**:
    - Specifies the command to run when the container starts.
      ```dockerfile
      CMD ["npm", "start"]
      ```
-
 7. **`ENV`**:
    - Sets environment variables in the container.
      ```dockerfile
      ENV NODE_ENV=production
      ```
-
 8. **`LABEL`**:
    - Adds metadata to the image.
      ```dockerfile
@@ -405,7 +394,13 @@ RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
    ```
 
 ### Steps:
-
+* To build a docker image, you need the application code and the Dockerfile.
+* You need to have docker installed
+* To push the image you need to have a dockerhub account and a repo
+* Clone the project repo
+     ```sh
+     https://github.com/HILL-TOPCONSULTANCY/hilltop-docker.git
+     ```
 1. **Build the Docker Image**  
    In the root of your project directory (where the `Dockerfile` is located), run:
    ```bash
@@ -414,22 +409,16 @@ RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
    This command:
    - Names your image `hilltopconsultancy/my-app`.
    - Tags it with version `1.0`.
-
 ---
 
 2. **Test the Docker Image (Optional)**  
    Run the image locally to ensure it works:
-   * Clone the project repo
-     ```sh
-     https://github.com/HILL-TOPCONSULTANCY/hilltop-docker.git
-     ```
+
    ```bash
    docker run -p 2020:8080 hilltopconsultancy/docker-learning:v1
    ```
    Visit `http://localhost:8080` in your browser to confirm it's functioning.
-
 ---
-
 3. **Log In to Docker Hub**  
    Log in to your Docker Hub account:
    ```bash
@@ -458,10 +447,8 @@ RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
    docker pull hilltopconsultancy/my-app:1.0
    ```
 ---
-
 ### **Dockerfile**  
 A **Dockerfile** is a text file containing instructions to build a Docker image. It specifies all the steps, such as selecting a base image, installing dependencies, copying files, and defining how the application runs. 
-
 **Example**:
 ```dockerfile
 # Start with a Node.js base image
@@ -483,9 +470,7 @@ EXPOSE 8080
 # Run the application
 CMD ["node", "app.js"]
 ```
-
 ---
-
 ### **Docker Image**  
 A **Docker image** is a lightweight, standalone, and executable software package that contains everything needed to run an application,
 including the code, runtime, libraries, and dependencies. Think of it as a snapshot of your application at a specific point in time.
@@ -494,9 +479,7 @@ including the code, runtime, libraries, and dependencies. Think of it as a snaps
 - Built from a Dockerfile.
 - Immutable (cannot be changed once created).
 - Used to create Docker containers.
-
 ---
-
 ### **Docker Container**  
 A **Docker container** is a running instance of a Docker image. It is an isolated environment where your application runs, behaving like a lightweight virtual machine but sharing the host system's kernel.
 
@@ -525,9 +508,7 @@ You can pull official or community-contributed images or push your own images to
 # Pull an official Node.js image from Docker Hub
 docker pull node:18-alpine
 ```
-
 ---
-
 ### **Docker Repository**  
 A **Docker repository** is a collection of related Docker images, often different versions of the same application or software.
 For example, a `node` repository may contain images for different versions of Node.js (e.g., `18-alpine`, `16-buster`).
@@ -540,7 +521,6 @@ For example, a `node` repository may contain images for different versions of No
 - **Public Repo**: `docker.io/library/node` (default location for Docker Hub images).
 - **Private Repo**: `my-org/my-private-image`.
 ---
-
 ## Docker Commands
 
 ### Frequently Used Docker Commands and Explanations

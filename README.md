@@ -419,6 +419,10 @@ RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
 
 2. **Test the Docker Image (Optional)**  
    Run the image locally to ensure it works:
+   * Clone the project repo
+     ```sh
+     https://github.com/HILL-TOPCONSULTANCY/hilltop-docker.git
+     ```
    ```bash
    docker run -p 2020:8080 hilltopconsultancy/docker-learning:v1
    ```

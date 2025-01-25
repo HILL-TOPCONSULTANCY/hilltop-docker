@@ -415,7 +415,7 @@ RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
    Run the image locally to ensure it works:
 
    ```bash
-   docker run -p 2020:8080 hilltopconsultancy/docker-learning:v1
+   docker run -d -p 2020:8080 <DockerhubUsername>/<>Repo:<TAG>
    ```
    Visit `http://localhost:8080` in your browser to confirm it's functioning.
 ---

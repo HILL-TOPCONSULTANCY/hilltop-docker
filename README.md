@@ -447,30 +447,6 @@ RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
    docker pull hilltopconsultancy/my-app:1.0
    ```
 ---
-### **Dockerfile**  
-A **Dockerfile** is a text file containing instructions to build a Docker image. It specifies all the steps, such as selecting a base image, installing dependencies, copying files, and defining how the application runs. 
-**Example**:
-```dockerfile
-# Start with a Node.js base image
-FROM node:18-alpine
-
-# Set the working directory
-WORKDIR /app
-
-# Copy package.json and install dependencies
-COPY package*.json ./
-RUN npm install
-
-# Copy the application code
-COPY . .
-
-# Expose the application's port
-EXPOSE 8080
-
-# Run the application
-CMD ["node", "app.js"]
-```
----
 ### **Docker Image**  
 A **Docker image** is a lightweight, standalone, and executable software package that contains everything needed to run an application,
 including the code, runtime, libraries, and dependencies. Think of it as a snapshot of your application at a specific point in time.

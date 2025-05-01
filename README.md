@@ -283,7 +283,7 @@ First, install Docker on your EC2 instance if it is not already installed:
 sudo yum update -y
 sudo yum -y install docker
 sudo service docker start
-sudo systemctl enable docker.service 
+sudo systemctl enable docker
 sudo usermod -a -G docker ec2-user 
 sudo chmod 666 /var/run/docker.sock
 ```
